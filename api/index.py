@@ -26,7 +26,7 @@ available_tools = {
 }
 
 
-@app.post("/api/chat-tools")
+@app.post("/api/chat")
 def handler(request: Request):
     messages = request.messages
     openai_messages = convert_to_openai_messages(messages)
