@@ -1,14 +1,31 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
 import { LogoNext, LogoPython } from "./icons";
 import Link from "next/link";
-
-const inter = Inter({ subsets: ["latin"] });
+import { GeistSans } from "geist/font/sans";
 
 export const metadata = {
-  title: "Examples",
+  title: "Vercel AI SDK and FastAPI Examples",
   description:
-    "Examples of using Vercel AI SDK in a Next.js application, powered by Python runtime.",
+    "Examples of using Vercel AI SDK in a Next.js application, powered by FastAPI.",
+  openGraph: {
+    title: "Vercel AI SDK and FastAPI Examples",
+    description:
+      "Examples of using Vercel AI SDK in a Next.js application, powered by FastAPI.",
+    type: "website",
+    images: [
+      {
+        url: "/og?title=Vercel AI SDK and FastAPI Examples",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [
+      {
+        url: "/og?title=Vercel AI SDK and FastAPI Examples",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
@@ -18,7 +35,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={GeistSans.className}>
         <Link href="/">
           <div className="border-b py-3 px-2 flex flex-row gap-2">
             <LogoNext />

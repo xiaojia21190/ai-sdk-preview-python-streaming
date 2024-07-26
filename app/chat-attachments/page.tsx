@@ -104,7 +104,7 @@ export default function Page() {
           value={input}
           placeholder="Send message..."
           onChange={handleInputChange}
-          className="bg-zinc-100 w-full p-2"
+          className="bg-zinc-100 w-full p-2 rounded-md"
           disabled={isLoading}
         />
       </form>
