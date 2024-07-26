@@ -1,12 +1,13 @@
-import os
 import json
+import os
 from fastapi import FastAPI
 from openai import OpenAI
 from pydantic import BaseModel
+from .utils.prompt import ClientMessage, convert_to_openai_messages
 from typing import List
 from dotenv import load_dotenv
-from .utils.prompt import ClientMessage, convert_to_openai_messages
 from .utils.tools import get_current_weather
+
 
 load_dotenv()
 
@@ -27,12 +28,11 @@ available_tools = {
 
 
 @app.post("/api/chat")
-def handler(request: Request):
+def hello_world(request: Request):
     messages = request.messages
     openai_messages = convert_to_openai_messages(messages)
 
     completion = client.chat.completions.create(
-        stream=False,
         messages=openai_messages,
         model="gpt-4o",
         tools=[{
