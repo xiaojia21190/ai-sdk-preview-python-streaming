@@ -8,10 +8,6 @@ export const metadata = {
   description:
     "Examples of using Vercel AI SDK in a Next.js application, powered by FastAPI.",
   openGraph: {
-    title: "Vercel AI SDK and FastAPI Examples",
-    description:
-      "Examples of using Vercel AI SDK in a Next.js application, powered by FastAPI.",
-    type: "website",
     images: [
       {
         url: "/og?title=Vercel AI SDK and FastAPI Examples",
