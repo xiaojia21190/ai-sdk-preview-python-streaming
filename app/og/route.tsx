@@ -3,6 +3,7 @@
 import { ImageResponse } from "next/server";
 
 export const runtime = "edge";
+export const preferredRegion = ["iad1"];
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
