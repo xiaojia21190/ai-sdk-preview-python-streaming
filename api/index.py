@@ -51,7 +51,7 @@ def hello_world(request: Request):
                             "type": "string",
                             "enum": ["celsius", "fahrenheit"]},
                     },
-                    "required": ["location"],
+                    "required": ["location",],
                 },
             },
         }]
