@@ -1,6 +1,5 @@
 import "./globals.css";
 import { GeistSans } from "geist/font/sans";
-import { KasadaClient } from "@/utils/kasada/kasada-client";
 import { Toaster } from "sonner";
 import { cn } from "@/lib/utils";
 import { Navbar } from "@/components/navbar";
@@ -36,7 +35,6 @@ export default function RootLayout({
       <head></head>
       <body className={cn(GeistSans.className, "antialiased dark")}>
         <Toaster position="top-center" richColors />
-        <KasadaClient />
         <Navbar />
         {children}
       </body>
