@@ -40,7 +40,7 @@ export function Chat() {
 
         {status === "streaming" && messages.length > 0 && messages[messages.length - 1].role === "user" && <ThinkingMessage />}
 
-        {status !== "ready" && status !== "streaming" && <div className="py-2 text-sm text-center text-muted-foreground">状态: {status}</div>}
+        {status === "error" && <div className="text-sm text-center text-muted-foreground">出错了！！！</div>}
 
         <div ref={messagesEndRef} className="shrink-0 min-w-[24px] min-h-[24px]" />
       </div>

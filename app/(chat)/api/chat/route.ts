@@ -35,7 +35,6 @@ export async function POST(request: Request) {
             dataStream.writeData('call completed');
           },
         });
-        console.log(result);
         result.mergeIntoDataStream(dataStream);
 
         // call annotation:
