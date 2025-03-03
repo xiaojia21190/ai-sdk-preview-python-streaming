@@ -16,10 +16,9 @@ load_dotenv(".env.local")
 app = FastAPI()
 
 client = OpenAI(
-    base_url="https://free.yunwu.ai/v1/chat/completions",
-    api_key=os.environ.get("sk-rxC2eIlJA6Vt8MEhrzGYwoy3nTDS1d5HHuYJGxRbowQ"),
+    base_url=os.environ.get("OPENAI_API_URL"),
+    api_key=os.environ.get("OPENAI_API_KEY"),
 )
-
 
 class Request(BaseModel):
     messages: List[ClientMessage]
