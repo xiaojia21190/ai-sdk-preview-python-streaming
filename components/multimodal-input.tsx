@@ -3,13 +3,7 @@
 import type { ChatRequestOptions, CreateMessage, Message } from "ai";
 import { motion } from "framer-motion";
 import type React from "react";
-import {
-  useRef,
-  useEffect,
-  useCallback,
-  type Dispatch,
-  type SetStateAction,
-} from "react";
+import { useRef, useEffect, useCallback, type Dispatch, type SetStateAction } from "react";
 import { toast } from "sonner";
 import { useLocalStorage, useWindowSize } from "usehooks-ts";
 
@@ -47,19 +41,16 @@ export function MultimodalInput({
   chatId: string;
   input: string;
   setInput: (value: string) => void;
-  isLoading: boolean;
+  isLoading: string;
   stop: () => void;
   messages: Array<Message>;
   setMessages: Dispatch<SetStateAction<Array<Message>>>;
-  append: (
-    message: Message | CreateMessage,
-    chatRequestOptions?: ChatRequestOptions,
-  ) => Promise<string | null | undefined>;
+  append: (message: Message | CreateMessage, chatRequestOptions?: ChatRequestOptions) => Promise<string | null | undefined>;
   handleSubmit: (
     event?: {
       preventDefault?: () => void;
     },
-    chatRequestOptions?: ChatRequestOptions,
+    chatRequestOptions?: ChatRequestOptions
   ) => void;
   className?: string;
 }) {
@@ -79,10 +70,7 @@ export function MultimodalInput({
     }
   };
 
-  const [localStorageInput, setLocalStorageInput] = useLocalStorage(
-    "input",
-    "",
-  );
+  const [localStorageInput, setLocalStorageInput] = useLocalStorage("input", "");
 
   useEffect(() => {
     if (textareaRef.current) {
@@ -115,18 +103,11 @@ export function MultimodalInput({
   }, [handleSubmit, setLocalStorageInput, width]);
 
   return (
-    <div className="relative w-full flex flex-col gap-4">
+    <div className="relative flex flex-col w-full gap-4">
       {messages.length === 0 && (
-        <div className="grid sm:grid-cols-2 gap-2 w-full">
+        <div className="grid w-full gap-2 sm:grid-cols-2">
           {suggestedActions.map((suggestedAction, index) => (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              transition={{ delay: 0.05 * index }}
-              key={`suggested-action-${suggestedAction.title}-${index}`}
-              className={index > 1 ? "hidden sm:block" : "block"}
-            >
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }} transition={{ delay: 0.05 * index }} key={`suggested-action-${suggestedAction.title}-${index}`} className={index > 1 ? "hidden sm:block" : "block"}>
               <Button
                 variant="ghost"
                 onClick={async () => {
@@ -138,9 +119,7 @@ export function MultimodalInput({
                 className="text-left border rounded-xl px-4 py-3.5 text-sm flex-1 gap-1 sm:flex-col w-full h-auto justify-start items-start"
               >
                 <span className="font-medium">{suggestedAction.title}</span>
-                <span className="text-muted-foreground">
-                  {suggestedAction.label}
-                </span>
+                <span className="text-muted-foreground">{suggestedAction.label}</span>
               </Button>
             </motion.div>
           ))}
@@ -152,17 +131,14 @@ export function MultimodalInput({
         placeholder="Send a message..."
         value={input}
         onChange={handleInput}
-        className={cn(
-          "min-h-[24px] max-h-[calc(75dvh)] overflow-hidden resize-none rounded-xl !text-base bg-muted",
-          className,
-        )}
+        className={cn("min-h-[24px] max-h-[calc(75dvh)] overflow-hidden resize-none rounded-xl !text-base bg-muted", className)}
         rows={3}
         autoFocus
         onKeyDown={(event) => {
           if (event.key === "Enter" && !event.shiftKey) {
             event.preventDefault();
 
-            if (isLoading) {
+            if (isLoading == "error") {
               toast.error("Please wait for the model to finish its response!");
             } else {
               submitForm();
@@ -171,7 +147,7 @@ export function MultimodalInput({
         }}
       />
 
-      {isLoading ? (
+      {isLoading == "streaming" ? (
         <Button
           className="rounded-full p-1.5 h-fit absolute bottom-2 right-2 m-0.5 border dark:border-zinc-600"
           onClick={(event) => {

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "fastapi-dev": "pip3 install -r requirements.txt && python3 -m uvicorn api.index:app --reload",
+    "fastapi-dev": "python3 -m uvicorn api.index:app --reload",
     "next-dev": "next dev",
     "dev": "concurrently \"npm run next-dev\" \"npm run fastapi-dev\"",
     "build": "next build",
@@ -11,6 +11,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^1.1.15",
+    "@ai-sdk/react": "^1.1.19",
     "@ai-sdk/ui-utils": "^0.0.20",
     "@radix-ui/react-slot": "^1.1.0",
     "@types/node": "20.2.4",
@@ -18,7 +20,7 @@
     "@types/react-dom": "18.2.4",
     "@vercel/analytics": "^1.3.1",
     "@vercel/kv": "^2.0.0",
-    "ai": "^4.0.2",
+    "ai": "^4.0.36",
     "autoprefixer": "10.4.14",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
